@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 
 class RegisterTest extends TestCase
 {
@@ -15,7 +15,7 @@ class RegisterTest extends TestCase
         $response = $this->postJson('api/register', [
             'name' => $user->name,
             'email' => $user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ]);
 
         $response->assertStatus(200)
@@ -32,8 +32,8 @@ class RegisterTest extends TestCase
                 'errors' => [
                     'name' => ['The name field is required.'],
                     'email' => ['The email field is required.'],
-                    'password' => ['The password field is required.']
-                ]
+                    'password' => ['The password field is required.'],
+                ],
             ]);
     }
 
@@ -43,7 +43,7 @@ class RegisterTest extends TestCase
         $response = $this->postJson('api/register', [
             'name' => 'invalid_name 123',
             'email' => 'invalid_email',
-            'password' => '123'
+            'password' => '123',
         ]);
 
         $response->assertStatus(422)
@@ -51,10 +51,9 @@ class RegisterTest extends TestCase
                 'errors' => [
 //                    'name' => ['The name may only contain letters and numbers.'],
                     'email' => ['The email must be a valid email address.'],
-                    'password' => ['The password must be at least 6 characters.']
-                ]
+                    'password' => ['The password must be at least 6 characters.'],
+                ],
             ]);
-
     }
 
     /** @test */
@@ -65,15 +64,15 @@ class RegisterTest extends TestCase
         $response = $this->postJson('api/register', [
             'name' => $user->name,
             'email' => $user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ]);
 
         $response->assertStatus(422)
             ->assertJson([
                 'errors' => [
                     'name' => ['The name has already been taken.'],
-                    'email' => ['The email has already been taken.']
-                ]
+                    'email' => ['The email has already been taken.'],
+                ],
             ]);
     }
 }

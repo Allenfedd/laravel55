@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 
 class LoginTest extends TestCase
 {
@@ -21,7 +21,7 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson('api/login', [
             'email' => $this->user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ]);
 
         $response->assertStatus(200)
@@ -38,8 +38,8 @@ class LoginTest extends TestCase
             ->assertJson([
                 'errors' => [
                     'email' => ['The email field is required.'],
-                    'password' => ['The password field is required.']
-                ]
+                    'password' => ['The password field is required.'],
+                ],
             ]);
     }
 
@@ -48,23 +48,22 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson('api/login', [
             'email' => $this->user->email,
-            'password' => 'wrong_password'
+            'password' => 'wrong_password',
         ]);
         $response->assertJson(['message' => 'Invalid credentials']);
     }
-
 
     /** @test */
     public function it_returns_the_current_user_when_logged_in()
     {
         $token = $this->postJson('api/login', [
             'email' => $this->user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ])->assertStatus(200)
             ->decodeResponseJson()['token'];
 
         $response = $this->getJson('api/me', [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
 
         $response->assertStatus(200)
@@ -72,8 +71,8 @@ class LoginTest extends TestCase
                 'user' => [
                     'id' => $this->user->id,
                     'name' => $this->user->name,
-                    'email' => $this->user->email
-                ]
+                    'email' => $this->user->email,
+                ],
             ]);
     }
 
@@ -83,7 +82,7 @@ class LoginTest extends TestCase
         $token = 'wrong_token';
 
         $response = $this->getJson('api/me', [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
         $response->assertStatus(401)
             ->assertJson(['message' => 'Wrong number of segments']);
@@ -97,5 +96,4 @@ class LoginTest extends TestCase
         $response->assertStatus(401)
             ->assertJson(['message' => 'Token not provided']);
     }
-
 }

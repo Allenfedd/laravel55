@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
@@ -33,7 +32,7 @@ class User extends Authenticatable implements AuthenticatableUserContract
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'created_at', 'updated_at'
+        'password', 'remember_token', 'created_at', 'updated_at',
     ];
 
     /**

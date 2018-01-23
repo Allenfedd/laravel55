@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\Auth;
 
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\API\UserLoginRequest;
 use App\Http\Requests\API\UserRegisterRequest;
 use App\Repositories\Contracts\UserRepositoryInterface as UserRepository;
-use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends ApiController
 {
@@ -26,7 +26,7 @@ class AuthController extends ApiController
     {
         $credentials = $request->only('email', 'password');
         try {
-            if (!$token = $this->guard()->attempt($credentials)) {
+            if (! $token = $this->guard()->attempt($credentials)) {
                 return response()->json(['message' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -41,7 +41,7 @@ class AuthController extends ApiController
         $user = $this->user->create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password'))
+            'password' => bcrypt($request->get('password')),
         ]);
 
         return $this->respondWithToken($this->guard()->login($user));
@@ -50,6 +50,7 @@ class AuthController extends ApiController
     public function me()
     {
         $user = $this->guard()->user();
+
         return response()->json(compact('user'));
     }
 
@@ -69,7 +70,7 @@ class AuthController extends ApiController
     {
         return response()->json([
             'token' => $token,
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
+            'expires_in' => $this->guard()->factory()->getTTL() * 60,
         ]);
     }
 

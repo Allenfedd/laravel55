@@ -23,7 +23,7 @@ class UserLoginRequest extends Request
     {
         return [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 }

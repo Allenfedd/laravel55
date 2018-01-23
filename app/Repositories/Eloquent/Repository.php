@@ -2,10 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Contracts\RepositoryInterface;
-
-use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Container\Container as Application;
+use App\Repositories\Contracts\RepositoryInterface;
 
 abstract class Repository implements RepositoryInterface
 {
@@ -43,7 +42,7 @@ abstract class Repository implements RepositoryInterface
     {
         $model = $this->app->make($this->model());
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new \Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -79,7 +78,7 @@ abstract class Repository implements RepositoryInterface
         return $this->model->pluck($columns, $key);
     }
 
-    public function paginate($perPage = null, $columns = ['*'], $method = "paginate")
+    public function paginate($perPage = null, $columns = ['*'], $method = 'paginate')
     {
         $paginator = $this->model->{$method}($perPage, $columns);
 
