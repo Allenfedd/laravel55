@@ -22,6 +22,16 @@ router.beforeEach((to, from, next) => {
             })
         }
     }
+
+    if (to.matched.some(record => record.meta.requiresGuest)) {
+        if (store.getters.authToken) {
+            next({
+                name: 'admin.dashboard',
+                replace: true,
+            })
+        }
+    }
+
     next();
 });
 

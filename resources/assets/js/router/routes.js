@@ -5,7 +5,7 @@ export default [
         path: '/admin/login',
         name: 'login',
         component: require('@/pages/auth/Login.vue'),
-        // meta: {requiresGuest: true}
+        meta: {requiresGuest: true}
     },
     {
         path: '/admin',
