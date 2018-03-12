@@ -75,10 +75,7 @@
                         this.loading = false;
                         this.$store.dispatch('setToken', response.data.token);
 
-                        //fetchUser
-                        this.$store.dispatch('fetchAuthUser').then(() => {
-                            this.$router.push({name: 'admin.dashboard'});
-                        })
+                        this.$router.push({name: 'admin.dashboard'});
                     })
                     .catch(error => {
                         this.loading = false;
