@@ -14,6 +14,11 @@ const mutations = {
     },
     [types.SET_AUTH_USER](state, {user}) {
         state.user = user;
+    },
+    [types.LOGOUT](state) {
+        state.token = null;
+        state.user = {};
+        localStorage.removeItem('token');
     }
 };
 
@@ -37,6 +42,18 @@ const actions = {
                     reject(error);
                 })
         });
+    },
+    logOut({commit}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/logout')
+                .then(() => {
+                    commit('LOGOUT');
+                    resolve();
+                })
+                .catch((error) => {
+                    reject(error);
+                })
+        })
     }
 };
 

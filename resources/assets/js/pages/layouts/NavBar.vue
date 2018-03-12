@@ -2,7 +2,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <div  class="logo">
+        <div class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>La</b>Vu</span>
             <!-- logo for regular state and mobile devices -->
@@ -60,7 +60,7 @@
                                  </div>
                                  -->
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a @click="signOut" href="javascript:;" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -82,5 +82,12 @@
             mapGetters({
                 user: 'authUser'
             })
+        ,
+        methods: {
+            signOut() {
+                this.$store.dispatch('logOut');
+                this.$router.replace({name: 'login'})
+            }
+        }
     }
 </script>
