@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 
 class RefreshTokenTest extends TestCase
 {
@@ -14,12 +14,12 @@ class RefreshTokenTest extends TestCase
 
         $token = $this->postJson('api/login', [
             'email' =>$user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ])->assertStatus(200)
             ->decodeResponseJson()['token'];
 
         $response = $this->postJson('api/refresh', [], [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
         $response->assertStatus(200)
             ->assertJsonStructure(['token', 'expires_in']);
@@ -31,7 +31,7 @@ class RefreshTokenTest extends TestCase
         $token = 'wrong_token';
 
         $response = $this->postJson('api/refresh', [], [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
 
         $response->assertStatus(401)

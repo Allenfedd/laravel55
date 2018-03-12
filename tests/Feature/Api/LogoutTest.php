@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 
 class LogoutTest extends TestCase
 {
@@ -21,11 +21,11 @@ class LogoutTest extends TestCase
     {
         $token = $this->postJson('api/login', [
             'email' => $this->user->email,
-            'password' => 'secret'
+            'password' => 'secret',
         ])->assertStatus(200)->decodeResponseJson()['token'];
 
         $response = $this->actingAs($this->user, 'api')->postJson('api/logout', [], [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
 
         $response->assertStatus(200)
@@ -40,7 +40,7 @@ class LogoutTest extends TestCase
         $token = 'wrong_token';
 
         $response = $this->postJson('api/logout', [], [
-            'Authorization' => 'Bearer' . $token
+            'Authorization' => 'Bearer'.$token,
         ]);
 
         $response->assertStatus(401)
