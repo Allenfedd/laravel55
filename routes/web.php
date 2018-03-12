@@ -18,6 +18,6 @@ Route::get('/', function () {
 /* Admin Dashboard */
 Route::group(['prefix' => 'admin'], function () {
     Route::get('{path?}', function () {
-        return view('admin.dashboard');
+        return view('admin.layouts.app');
     })->where('path', '.*');
 });
