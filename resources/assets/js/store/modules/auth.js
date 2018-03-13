@@ -34,7 +34,7 @@ const actions = {
     },
     fetchAuthUser({commit}) {
         return new Promise((resolve, reject) => {
-            axios.get('/me')
+            axios.get('/api/me')
                 .then((response) => {
                     commit('SET_AUTH_USER', response.data);
                     resolve();
@@ -46,7 +46,7 @@ const actions = {
     },
     logOut({commit}) {
         return new Promise((resolve, reject) => {
-            axios.post('/logout')
+            axios.post('/api/logout')
                 .then(() => {
                     commit('LOGOUT');
                     resolve();

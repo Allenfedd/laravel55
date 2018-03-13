@@ -70,7 +70,7 @@
         methods: {
             signIn() {
                 this.loading = true;
-                this.$http.post('/login', this.user)
+                this.$http.post('/api/login', this.user)
                     .then(response => {
                         this.loading = false;
                         this.$store.dispatch('setToken', response.data.token);
