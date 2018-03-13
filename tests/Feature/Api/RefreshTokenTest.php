@@ -13,28 +13,28 @@ class RefreshTokenTest extends TestCase
         $user = factory(User::class)->create();
 
         $token = $this->postJson('api/login', [
-            'email' =>$user->email,
+            'email' => $user->email,
             'password' => 'secret',
         ])->assertStatus(200)
             ->decodeResponseJson()['token'];
 
         $response = $this->postJson('api/refresh', [], [
-            'Authorization' => 'Bearer'.$token,
+            'Authorization' => 'Bearer ' . $token,
         ]);
         $response->assertStatus(200)
             ->assertJsonStructure(['token', 'expires_in']);
     }
 
     /** @test */
-    public function it_throws_failed_to_validate_token_error_on_user_refresh_token()
+    public function it_throws_failed_to_parsed_token_when_given_wrong_token()
     {
         $token = 'wrong_token';
 
         $response = $this->postJson('api/refresh', [], [
-            'Authorization' => 'Bearer'.$token,
+            'Authorization' => 'Bearer ' . $token,
         ]);
 
-        $response->assertStatus(401)
-            ->assertJson(['message' => 'Wrong number of segments']);
+        $response->assertStatus(500)
+            ->assertJson(['message' => 'Token could not be parsed from the request.']);
     }
 }

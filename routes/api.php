@@ -25,10 +25,11 @@ Route::group(['namespace' => 'API'], function () {
         // return a reset token to given user
         Route::post('password/email/reset_token', 'ForgotPasswordController@getResetToken');
 
+        //refresh jwt token
+        Route::post('refresh_token', 'AuthController@refreshToken');
+
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::post('logout', 'AuthController@logout');
-            Route::post('refresh', 'AuthController@refreshToken');
-
             Route::get('me', 'AuthController@me');
         });
     });
