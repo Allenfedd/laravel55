@@ -30,13 +30,35 @@
             -->
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li>
-                    <router-link :to="{ name: 'admin.dashboard' }"><i class="fa fa-dashboard"></i>Dashboard</router-link>
-                </li>
-            </ul>
+            <SideBarItem :menuData="menus"></SideBarItem>
         </section>
         <!-- /.sidebar -->
     </aside>
 </template>
+
+<script>
+    import SideBarItem from '@/components/SideBarItem'
+
+    export default {
+        components: {SideBarItem},
+
+        data() {
+            return {
+                menus: [
+                    {
+                        name: 'Dashboard',
+                        to: 'admin.dashboard',
+                        icon: 'fa fa-dashboard',
+                        paths: ['dashboard']
+                    },
+                    {
+                        name: 'Post',
+                        to: 'admin.post',
+                        icon: 'fa fa-book',
+                        paths: ['post', 'post/create', 'post/:id/edit']
+                    }
+                ]
+            }
+        }
+    }
+</script>
