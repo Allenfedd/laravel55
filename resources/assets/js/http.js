@@ -35,7 +35,7 @@ axios.interceptors.response.use(
     (error) => {
         const errorResponse = error.response;
         // refresh jwt token when token expired
-        if (errorResponse.status === 401 && errorResponse.data.message == "Token has expired" && !errorResponse.config.isRetryRequest) {
+        if (errorResponse.status === 401 && errorResponse.data.message === "Token has expired" && !errorResponse.config.isRetryRequest) {
             return new Promise((resolve, reject) => {
                 axios.post('/api/refresh_token')
                     .then((response => {
