@@ -19,8 +19,16 @@ class PostRepository extends Repository implements PostRepositoryInterface
         return $this->model;
     }
 
-    public function syncTag(Post $post, array $tags = [])
+    public function syncTag(Post $post, array $tags)
     {
         $post->tags()->sync($tags);
+    }
+
+    public function delete($id)
+    {
+        $this->model = $this->findOrFail($id);
+        $this->model->delete();
+
+        return $this->model;
     }
 }

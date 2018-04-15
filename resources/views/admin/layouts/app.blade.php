@@ -24,7 +24,7 @@
            folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('/vendor/adminlte/css/skins/skin-blue.min.css') }}">
     <!-- Styles -->
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     @stack('after_styles')
 

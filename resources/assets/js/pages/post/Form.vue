@@ -82,7 +82,7 @@
                 }
                 this.$http[method](url, saveObj)
                     .then((response) => {
-                        this.$router.push({name: 'admin.post.list'})
+                        this.$router.push({name: 'admin.post'})
                     }).catch((response) => {
                     console.log(response)
                 })

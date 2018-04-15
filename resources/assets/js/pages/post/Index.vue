@@ -40,11 +40,14 @@
                             </td>
                             <td>{{item.created_at}}</td>
                             <td class="col-sm-3">
-                                <div class="btn-group">
-                                    <router-link :to="{ path: '/admin/post/' + item.id +'/edit'}"
-                                                 class="btn btn-warning btn-xs">Edit
-                                    </router-link>
-                                </div>
+                                <!--<div class="btn-group">-->
+                                <router-link :to="{ path: '/admin/post/' + item.id +'/edit'}"
+                                             class="btn btn-warning btn-xs" style="margin-right: 10px;">Edit
+                                </router-link>
+                                <button class="btn btn-danger btn-xs" @click="deletePost(item)" title="Delete"><i
+                                        class="fa fa-trash"></i>
+                                </button>
+                                <!--</div>-->
                             </td>
                         </tr>
                         </tbody>
@@ -118,6 +121,26 @@
                         this.pagination = response.data.meta.pagination
                         this.currentPage = response.data.meta.pagination.current_page
                     })
+            },
+            deletePost(post) {
+                swal({
+                    title: 'Are you sure?',
+                    text: `Post ${post.title} will be removed.`,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.value) {
+                        this.$http.delete('/api/posts/' + post.id)
+                            .then(() => {
+                                this.getPosts();
+                                toastr.success('Post removed.');
+                            }).catch(() => {
+                            swal('Ooops...', 'Something went wrong!', 'error');
+                        })
+                    }
+                });
             }
         }
     }

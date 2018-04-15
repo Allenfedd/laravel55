@@ -41,4 +41,13 @@ class PostController extends ApiController
 
         return $this->response()->withNoContent();
     }
+
+    public function destroy($id)
+    {
+        $model = $this->post->delete($id);
+
+        $this->post->syncTag($model, []);
+
+        return $this->response()->withNoContent();
+    }
 }

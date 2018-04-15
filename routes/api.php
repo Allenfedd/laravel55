@@ -35,4 +35,7 @@ Route::group(['namespace' => 'API'], function () {
     });
     //Post
     Route::resource('posts', 'PostController')->except(['create', 'edit']);
+
+    //Tag
+    Route::resource('tags', 'TagController')->only(['index']);
 });
