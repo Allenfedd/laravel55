@@ -33,4 +33,6 @@ Route::group(['namespace' => 'API'], function () {
             Route::get('me', 'AuthController@me');
         });
     });
+    //Post
+    Route::resource('posts', 'PostController')->except(['create', 'edit']);
 });
