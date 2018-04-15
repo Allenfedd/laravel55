@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\Eloquent\PostRepository;
+use App\Repositories\Eloquent\TagRepository;
+
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\PostRepositoryInterface;
-use App\Repositories\Eloquent\PostRepository;
+use App\Repositories\Contracts\TagRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,5 +32,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
     }
 }
