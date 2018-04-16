@@ -11,5 +11,5 @@ Client side
 
 Server side
 * Laravel 5.5
-* JWT Authentication - [tymon/jwt-auth](http://github.com/tymondesigns/jwt-auth/)
+* Authentication with JWT Token - [tymon/jwt-auth](http://github.com/tymondesigns/jwt-auth/)
 * API Response Transformer - [Fractal](http://fractal.thephpleague.com/)

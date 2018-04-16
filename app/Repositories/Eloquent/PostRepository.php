@@ -31,4 +31,9 @@ class PostRepository extends Repository implements PostRepositoryInterface
 
         return $this->model;
     }
+
+    public function count()
+    {
+        return $this->model->count();
+    }
 }

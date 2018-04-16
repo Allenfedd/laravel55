@@ -2,17 +2,14 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <!--<h3 class="box-title">Post List</h3>-->
-                    <router-link :to="{ name:'admin.post.create' }" class="btn btn-success btn-md">
-                        <i class="fa fa-plus-circle"></i>Create Post
-                    </router-link>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Post List</h3>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
+                        <div class="input-group input-group-sm">
+                            <!--<input type="text" name="table_search" class="form-control pull-right"  style="width:30%;" placeholder="Search">-->
                             <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                <!--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+                                <router-link :to="{ name:'admin.post.create' }" class="btn btn-primary btn-md pull-right">Create Post</router-link>
                             </div>
                         </div>
                     </div>
@@ -24,7 +21,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Tag</th>
-                            <th>Date</th>
+                            <th>Created</th>
                             <th>Action</th>
                         </tr>
                         <tr v-for="item in items">

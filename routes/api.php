@@ -33,6 +33,10 @@ Route::group(['namespace' => 'API'], function () {
             Route::get('me', 'AuthController@me');
         });
     });
+
+    //Home
+    Route::get('dashboard', 'HomeController@dashboard');
+
     //Post
     Route::resource('posts', 'PostController')->except(['create', 'edit']);
 
