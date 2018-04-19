@@ -85,4 +85,13 @@ interface RepositoryInterface
      * @return mixed
      */
     public function findAllBy($attribute, $value, $columns = ['*']);
+
+    /**
+     * Load relations
+     *
+     * @param $relations
+     *
+     * @return $this
+     */
+    public function with($relations);
 }

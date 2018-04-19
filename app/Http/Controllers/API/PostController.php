@@ -17,7 +17,7 @@ class PostController extends ApiController
 
     public function index()
     {
-        return $this->response()->collection($this->post->paginate(), new PostTransformer());
+        return $this->response()->collection($this->post->with('tags')->paginate(), new PostTransformer());
     }
 
     public function store(Request $request)

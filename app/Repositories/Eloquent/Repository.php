@@ -119,4 +119,17 @@ abstract class Repository implements RepositoryInterface
     {
         return $this->model->where($attribute, '=', $value)->get($columns);
     }
+
+    /**
+     * Load relations
+     *
+     * @param array|string $relations
+     *
+     * @return $this
+     */
+    public function with($relations)
+    {
+        $this->model = $this->model->with($relations);
+        return $this;
+    }
 }
