@@ -14,7 +14,7 @@ class PostRepository extends Repository implements PostRepositoryInterface
 
     public function update(array $data, $id, $attribute = 'id')
     {
-        $this->model = $this->findOrFail($id);
+        $this->model = $this->findBy('id', $id);
         $this->model->update($data);
         return $this->model;
     }
@@ -26,7 +26,7 @@ class PostRepository extends Repository implements PostRepositoryInterface
 
     public function delete($id)
     {
-        $this->model = $this->findOrFail($id);
+        $this->model = $this->findBy('id', $id);
         $this->model->delete();
 
         return $this->model;
